@@ -2,16 +2,19 @@ const convertButton = document.querySelector("button")
 
 const currencySelect = document.querySelector(".currency-select")
 
-function convertValues (){
+async function convertValues (){
     const inputCurrencyValue = document.querySelector(".input-currency").value
 
 const MoedaValorConvert = document.querySelector(".valor-da-moeda-convert")
 
 const moedaD = document.querySelector(".valor-da-moeda")
 
-const dolarToday = 5.71
-const euroToday = 6.16
-const libraToday = 7.42
+const data  = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then(resposta => resposta.json())
+
+const dolar = data.USDBRL.higth
+
+const euroToday = data.EURBRL.higth
+
 
 
 if(currencySelect.value == "dolar"){
@@ -19,7 +22,7 @@ if(currencySelect.value == "dolar"){
         style: "currency",
         currency:"USD"
     
-    }).format( inputCurrencyValue / dolarToday)
+    }).format( inputCurrencyValue / dolar)
 
 }
 
